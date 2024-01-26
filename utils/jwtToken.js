@@ -1,4 +1,5 @@
 const jwt=require("jsonwebtoken");
+const cookieParams = { httpOnly: true, sameSite: "none", secure: true };
 exports.getToken=(req,res) => {
     const options={
         id:req.user._id,
