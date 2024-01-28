@@ -14,7 +14,7 @@ exports.getToken=(req,res) => {
             isAuthenticated:false,
     })
 }
-    res.status(200).cookie("token",token).json({
+    res.status(200).cookie("token",token,cookieparams).json({
         success:true,
         user:req.user,
         token,
