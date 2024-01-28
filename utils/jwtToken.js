@@ -1,4 +1,6 @@
 const jwt=require("jsonwebtoken");
+const cookieParams = { httpOnly: true, sameSite: "none", secure: true };
+
 
 
 exports.getToken=(req,res) => {
@@ -7,6 +9,7 @@ exports.getToken=(req,res) => {
         time:Date.now()
     }
     const token=jwt.sign(options,process.env.JWT_SECRET_KEY,{expiresIn:'80min'});
+ 
     if(!token){
         return  res.status(500).json({
             success:false,
@@ -14,7 +17,7 @@ exports.getToken=(req,res) => {
             isAuthenticated:false,
     })
 }
-    res.status(200).cookie("token",token,cookieparams).json({
+    res.status(200).cookie("token",token,cookieParams).json({
         success:true,
         user:req.user,
         token,
